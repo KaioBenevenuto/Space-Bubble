@@ -45,25 +45,26 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fc8ui"]
-radius = 36.0
-height = 112.0
+radius = 35.0
+height = 102.0
 
 [node name="Inimigo" type="RigidBody2D"]
+collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_3rb8d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_hh1cl")
-animation = &"nadando"
+animation = &"voando"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-6, 0)
+position = Vector2(-2, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_fc8ui")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-5, 0)
-scale = Vector2(4.35, 2.75)
+position = Vector2(-0.249998, -0.749998)
+scale = Vector2(3.875, 2.675)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

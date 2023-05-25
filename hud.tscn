@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://iineyms175d2"]
+
+[ext_resource type="FontFile" uid="uid://c2uj43ifl30r7" path="res://fonts/Xolonium-Regular.ttf" id="1_atm31"]
+[ext_resource type="Script" path="res://hud.gd" id="1_nkbxu"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_nkbxu")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -136.0
+offset_right = 136.0
+offset_bottom = 87.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_atm31")
+theme_override_font_sizes/font_size = 64
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MensageLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.5
+offset_top = -38.0
+offset_right = 148.5
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_atm31")
+theme_override_font_sizes/font_size = 32
+text = "Sobreviva!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MensageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -53.0
+offset_top = -303.0
+offset_right = 53.0
+offset_bottom = -261.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_atm31")
+theme_override_font_sizes/font_size = 32
+text = "Start"
+
+[connection signal="timeout" from="MensageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

@@ -17,7 +17,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"cima",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -28,7 +28,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"direita",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5jwbp"]
@@ -40,10 +40,13 @@ script = ExtResource("1_8nwtb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, 13)
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_mkgo7")
 animation = &"cima"
+frame_progress = 0.658001
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 14)
 shape = SubResource("CapsuleShape2D_5jwbp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

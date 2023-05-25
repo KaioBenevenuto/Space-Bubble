@@ -1,39 +1,20 @@
-#extends AnimatedSprite2D
-#
-#@export var speed = 400
-#var screen_size 
-#
-#func _ready():
-#	screen_size = get_viewport_rect().size
-#
-#
-#func _process(delta: float) -> void:
-#	var velocity = Vector2()
-#
-#	if Input.is_action_pressed("ui_right"):
-#		velocity.x += 1
-#	if Input.is_action_pressed("ui_left"):
-#		velocity.x -= 1
-#	if Input.is_action_pressed("ui_up"):
-#		velocity.y -= 1	
-#	if Input.is_action_pressed("ui_down"):
-#		velocity.y += 1
-#
-#	if velocity.length() > 0:
-#		velocity = velocity.normalized() * speed
-#		play()
-#	else:
-#		stop()
-#
-#	if velocity.x != 0:
-#		animation = "direita"
-#		flip_v = false
-#		flip_h = velocity.x < 0
-#	if velocity.y != 0:
-#		animation = "cima"
-#		flip_v = velocity.y > 0
-#		flip_h = false
-#
-#	position += velocity * delta
-#	position.x = clamp(position.x, 0, screen_size.x)
-#	position.y = clamp(position.y, 0, screen_size.y)
+extends AnimatedSprite2D
+#Não funciona
+var colisor_a: PhysicsBody2D
+var colisor_b: PhysicsBody2D
+
+func _ready():
+	colisor_a = $ColisorSprite2D
+	colisor_b = $ColisorSprite2D_2
+
+func troca_animacao(nome_animacao: String):
+	colisor_a.set_deferred("disabled", true)
+	colisor_b.set_deferred("disabled", true)
+
+	if nome_animacao in ["andando", "nadando"]:
+		colisor_a.set_deferred("disabled", false)
+		colisor_b.set_deferred("disabled", true)
+	elif nome_animacao == "voando":
+		colisor_b.set_deferred("disabled", false)
+		colisor_a.set_deferred("disabled", true)
+#	play(nome_animacao)

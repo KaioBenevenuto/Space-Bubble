@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://di6prtlyv14qt"]
+
+[ext_resource type="PackedScene" uid="uid://dmwd4sx2tqsjj" path="res://jogador.tscn" id="1_0vg21"]
+[ext_resource type="Script" path="res://principal.gd" id="1_52ec5"]
+[ext_resource type="PackedScene" uid="uid://sy24sf1ebq70" path="res://inimigo.tscn" id="2_elv33"]
+[ext_resource type="PackedScene" uid="uid://iineyms175d2" path="res://hud.tscn" id="4_fqhk7"]
+
+[sub_resource type="Curve2D" id="Curve2D_ch05o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="Principal" type="Node"]
+script = ExtResource("1_52ec5")
+Inimigo = ExtResource("2_elv33")
+
+[node name="Jogador" parent="." instance=ExtResource("1_0vg21")]
+
+[node name="InicioTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="PontuacaoTimer" type="Timer" parent="."]
+
+[node name="InimigoTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="PosicaoInicial" type="Marker2D" parent="."]
+position = Vector2(240, 360)
+
+[node name="CaminhoInimigo" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ch05o")
+
+[node name="SpawnInimigo" type="PathFollow2D" parent="CaminhoInimigo"]
+
+[node name="HUD" parent="." instance=ExtResource("4_fqhk7")]
+
+[connection signal="hit" from="Jogador" to="." method="game_over"]
+[connection signal="timeout" from="InicioTimer" to="." method="_on_inicio_timer_timeout"]
+[connection signal="timeout" from="PontuacaoTimer" to="." method="_on_pontuacao_timer_timeout"]
+[connection signal="timeout" from="InimigoTimer" to="." method="_on_inimigo_timer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="novo_jogo"]

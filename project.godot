@@ -11,13 +11,9 @@ config_version=5
 [application]
 
 config/name="Dev Games"
-run/main_scene="res://jogador.tscn"
+run/main_scene="res://principal.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
-
-[debug]
-
-file_logging/enable_file_logging=true
 
 [display]
 
