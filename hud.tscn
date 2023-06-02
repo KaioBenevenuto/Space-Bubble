@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://iineyms175d2"]
+[gd_scene load_steps=5 format=3 uid="uid://iineyms175d2"]
 
 [ext_resource type="FontFile" uid="uid://c2uj43ifl30r7" path="res://fonts/Xolonium-Regular.ttf" id="1_atm31"]
 [ext_resource type="Script" path="res://hud.gd" id="1_nkbxu"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_4bwwy"]
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_7b1an"]
+events = [SubResource("InputEventKey_4bwwy")]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_nkbxu")
@@ -34,6 +40,7 @@ offset_bottom = 38.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_atm31")
 theme_override_font_sizes/font_size = 32
 text = "Sobreviva!"
@@ -60,6 +67,7 @@ grow_vertical = 0
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_atm31")
 theme_override_font_sizes/font_size = 32
+shortcut = SubResource("Shortcut_7b1an")
 text = "Start"
 
 [connection signal="timeout" from="MensageTimer" to="." method="_on_message_timer_timeout"]

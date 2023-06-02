@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://di6prtlyv14qt"]
+[gd_scene load_steps=9 format=3 uid="uid://di6prtlyv14qt"]
 
 [ext_resource type="PackedScene" uid="uid://dmwd4sx2tqsjj" path="res://jogador.tscn" id="1_0vg21"]
 [ext_resource type="Script" path="res://principal.gd" id="1_52ec5"]
 [ext_resource type="PackedScene" uid="uid://sy24sf1ebq70" path="res://inimigo.tscn" id="2_elv33"]
+[ext_resource type="Texture2D" uid="uid://bbd8o2ymgqwc" path="res://art/Fundo.jpg" id="3_mgrtf"]
 [ext_resource type="PackedScene" uid="uid://iineyms175d2" path="res://hud.tscn" id="4_fqhk7"]
+[ext_resource type="AudioStream" uid="uid://b5xrj8udljyqf" path="res://art/House In a Forest Loop.ogg" id="6_ef0sb"]
+[ext_resource type="AudioStream" uid="uid://3abt8nqo7tbd" path="res://art/gameover.wav" id="7_d6hre"]
 
 [sub_resource type="Curve2D" id="Curve2D_ch05o"]
 _data = {
@@ -14,6 +17,12 @@ point_count = 5
 [node name="Principal" type="Node"]
 script = ExtResource("1_52ec5")
 Inimigo = ExtResource("2_elv33")
+
+[node name="Fundo" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1202.0
+size_flags_vertical = 4
+texture = ExtResource("3_mgrtf")
 
 [node name="Jogador" parent="." instance=ExtResource("1_0vg21")]
 
@@ -35,6 +44,12 @@ curve = SubResource("Curve2D_ch05o")
 [node name="SpawnInimigo" type="PathFollow2D" parent="CaminhoInimigo"]
 
 [node name="HUD" parent="." instance=ExtResource("4_fqhk7")]
+
+[node name="Musica" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ef0sb")
+
+[node name="SomMorte" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_d6hre")
 
 [connection signal="hit" from="Jogador" to="." method="game_over"]
 [connection signal="timeout" from="InicioTimer" to="." method="_on_inicio_timer_timeout"]

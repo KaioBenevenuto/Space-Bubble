@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmwd4sx2tqsjj"]
+[gd_scene load_steps=14 format=3 uid="uid://dmwd4sx2tqsjj"]
 
 [ext_resource type="Script" path="res://jogador.gd" id="1_8nwtb"]
 [ext_resource type="Texture2D" uid="uid://82rws2o5evop" path="res://art/playerGrey_up1.png" id="1_wrg7m"]
 [ext_resource type="Texture2D" uid="uid://y332l68dvkr" path="res://art/playerGrey_up2.png" id="2_fxnht"]
 [ext_resource type="Texture2D" uid="uid://cvjtxvpku7tov" path="res://art/playerGrey_walk1.png" id="3_y5mhu"]
 [ext_resource type="Texture2D" uid="uid://c5usbrwrgjywk" path="res://art/playerGrey_walk2.png" id="4_bs478"]
+[ext_resource type="Texture2D" uid="uid://dqp6j3ks70bc2" path="res://art/Rastro.png" id="6_4nk43"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mkgo7"]
 animations = [{
@@ -32,8 +33,31 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5jwbp"]
-radius = 39.0
-height = 106.0
+radius = 33.0
+height = 82.0
+
+[sub_resource type="Gradient" id="Gradient_bbwbv"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6ortc"]
+gradient = SubResource("Gradient_bbwbv")
+
+[sub_resource type="Curve" id="Curve_2iknu"]
+_data = [Vector2(0, 0.496933), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f4o1k"]
+curve = SubResource("Curve_2iknu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lmjjk"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.1
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_f4o1k")
+color_ramp = SubResource("GradientTexture1D_6ortc")
 
 [node name="Jogador" type="Area2D"]
 script = ExtResource("1_8nwtb")
@@ -46,7 +70,13 @@ animation = &"cima"
 frame_progress = 0.658001
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 14)
+visible = false
+position = Vector2(-1, 12)
 shape = SubResource("CapsuleShape2D_5jwbp")
+
+[node name="Rastro" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+process_material = SubResource("ParticleProcessMaterial_lmjjk")
+texture = ExtResource("6_4nk43")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

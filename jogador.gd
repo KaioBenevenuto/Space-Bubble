@@ -25,8 +25,10 @@ func _process(delta: float) -> void:
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		$AnimatedSprite2D.play()
+		$Rastro.emitting = true
 	else:
 		$AnimatedSprite2D.stop()
+		$Rastro.emitting = false
 		
 	if velocity.x != 0:
 		$AnimatedSprite2D.animation = "direita"

@@ -12,14 +12,16 @@ func game_over():
 	$PontuacaoTimer.stop()
 	$InimigoTimer.stop()
 	$HUD.exibir_gameover()
+	$Musica.stop()
+	$SomMorte.play()
 	
 func novo_jogo():
 	score = 0
 	$Jogador.start($PosicaoInicial.position)
 	$InicioTimer.start()
-	$HUD.exibir_mensagem("Iniciando...")
+	$HUD.exibir_mensagem("Criando inimigos")
 	$HUD.atualize_score(score)
-
+	$Musica.play()
 
 func _on_inicio_timer_timeout():
 	$InimigoTimer.start()
